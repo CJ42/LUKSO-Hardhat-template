@@ -3,7 +3,7 @@ import { anyValue } from '@nomicfoundation/hardhat-chai-matchers/withArgs';
 import { expect } from 'chai';
 import { ethers } from 'hardhat';
 
-import { MyNFTCollection, MyNFTCollection__factory } from '../typechain-types';
+import { BasicNFTCollection, BasicNFTCollection__factory } from '../typechain-types';
 
 const LSP8MetadataTokenURI = '0x1339e76a390b7b9ec9010000';
 const LSP8ReferenceContract = '0x708e7b881795f2e6b6c2752108c177ec89248458de3bf69d0d43480b3e5034e6';
@@ -15,17 +15,17 @@ describe('BoredApes Collection', () => {
     const accounts = await ethers.getSigners();
     const deployer = accounts[0];
 
-    const boredApesCollection: MyNFTCollection = await new MyNFTCollection__factory(
+    const boredApesCollection: BasicNFTCollection = await new BasicNFTCollection__factory(
       deployer,
     ).deploy('BoredApeYachtClub', 'BAYC', deployer.address);
 
     await boredApesCollection.setData(
       LSP8TokenMetadataBaseURI,
-      ethers.toUtf8Bytes('ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/'),
+      ethers.toUtf8Bytes('ipfs://your-base-uri-on-ipf-goes-here/'),
     );
 
     expect(await boredApesCollection.getData(LSP8TokenMetadataBaseURI)).to.equal(
-      ethers.toUtf8Bytes('ipfs://QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/'),
+      ethers.toUtf8Bytes('ipfs://your-base-uri-on-ipf-goes-here/'),
     );
   });
 });

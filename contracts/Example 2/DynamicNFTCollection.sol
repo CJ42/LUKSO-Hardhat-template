@@ -2,7 +2,6 @@
 pragma solidity ^0.8.4;
 
 // modules
-import {ERC725Y} from "@erc725/smart-contracts/contracts/ERC725Y.sol";
 import {
     LSP8Mintable
 } from "@lukso/lsp-smart-contracts/contracts/LSP8IdentifiableDigitalAsset/presets/LSP8Mintable.sol";
@@ -13,10 +12,6 @@ import {
 } from "@lukso/lsp-smart-contracts/contracts/LSP8IdentifiableDigitalAsset/LSP8Constants.sol";
 
 import {_LSP4_TOKEN_TYPE_DATA_KEY, TokenType} from "../TokenTypes.sol";
-
-contract DynamicNFT is ERC725Y {
-    constructor(address nftOwner) ERC725Y(nftOwner) {}
-}
 
 contract DynamicNFTCollection is LSP8Mintable {
     constructor(
