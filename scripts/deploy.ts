@@ -1,27 +1,35 @@
 import { ethers } from "hardhat";
 
-async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
+import {MyNFTCollection__factory} from "../typechain-types";
 
-  const lockedAmount = ethers.parseEther("0.001");
+import {LSP8_TOKEN_ID_TYPES} from "@lukso/lsp-smart-contracts"
 
-  const lock = await ethers.deployContract("Lock", [unlockTime], {
-    value: lockedAmount,
-  });
+async function deployLSP8Collection() {
+  const accounts = await ethers.getSigners();
+  const signer = accounts[0];
 
-  await lock.waitForDeployment();
+  const lsp8ContractFactory = new ethers.ContractFactory(
+    MyNFTCollection__factory.abi,
+    MyNFTCollection__factory.bytecode,
+    signer
+  )
 
-  console.log(
-    `Lock with ${ethers.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
+  const lsp8Contract = await lsp8ContractFactory.deploy(
+    "NFT Collection Name", // collection name
+    "NFT", // collection symbol
+    signer.address,
+    LSP8_TOKEN_ID_TYPES.NUMBER
   );
+
+  await lsp8Contract.waitForDeployment();
+
+  console.log(lsp8Contract)
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
-main().catch((error) => {
+deployLSP8Collection().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
