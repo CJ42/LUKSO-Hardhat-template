@@ -18,7 +18,7 @@ contract LSP7DigitalStickers is LSP7DigitalAsset, LSP7Burnable {
         uint256 totalNumberOfStickersInCirculation
     ) LSP7DigitalAsset(stickerName, stickerSymbol, contractOwner, true) {
         // Set the type of the token
-        _setData(_LSP4_TOKEN_TYPE_DATA_KEY, abi.encode(TokenType.COLLECTION));
+        _setData(_LSP4_TOKEN_TYPE_DATA_KEY, abi.encode(TokenType.NFT));
 
         // mint the total number of stickers that the LSP8 Collection owns
         _mint({
