@@ -6,7 +6,10 @@ import {
     LSP7Mintable
 } from "@lukso/lsp-smart-contracts/contracts/LSP7DigitalAsset/presets/LSP7Mintable.sol";
 
-import {_LSP4_TOKEN_TYPE_DATA_KEY, TokenType} from "../TokenTypes.sol";
+// constants
+import {
+    _LSP4_TOKEN_TYPE_TOKEN
+} from "@lukso/lsp-smart-contracts/contracts/LSP4DigitalAssetMetadata/LSP4Constants.sol";
 
 contract EventTicketsNFT is LSP7Mintable {
     constructor(
@@ -18,10 +21,8 @@ contract EventTicketsNFT is LSP7Mintable {
             eventName,
             tokenSymbol,
             contractOwner,
+            _LSP4_TOKEN_TYPE_TOKEN,
             true // make the token non divisible
         )
-    {
-        // set the token type
-        _setData(_LSP4_TOKEN_TYPE_DATA_KEY, abi.encode(TokenType.TOKEN));
-    }
+    {}
 }

@@ -8,7 +8,11 @@ import {
 
 // constants
 import {
-    _LSP8_TOKENID_TYPE_STRING
+    _LSP4_TOKEN_TYPE_COLLECTION
+} from "@lukso/lsp-smart-contracts/contracts/LSP4DigitalAssetMetadata/LSP4Constants.sol";
+
+import {
+    _LSP8_TOKENID_FORMAT_STRING
 } from "@lukso/lsp-smart-contracts/contracts/LSP8IdentifiableDigitalAsset/LSP8Constants.sol";
 
 // put the address to specify the owner of the LSP8 collection and use a different deployer address
@@ -19,7 +23,8 @@ contract DigitalArtCollection is
         "3D Artistic Cubes", // collection name
         "3DCuB", // symbol
         _LSP8_COLLECTION_OWNER, // contract owner
-        _LSP8_TOKENID_TYPE_STRING
+        _LSP4_TOKEN_TYPE_COLLECTION,
+        _LSP8_TOKENID_FORMAT_STRING
     )
 {
     function createNewCube(

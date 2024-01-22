@@ -9,10 +9,12 @@ import {LSP7DigitalStickers} from "./LSP7DigitalStickers.sol";
 
 // constants
 import {
-    _LSP8_TOKENID_TYPE_ADDRESS
+    _LSP8_TOKENID_FORMAT_ADDRESS,
+    _LSP8_REFERENCE_CONTRACT
 } from "@lukso/lsp-smart-contracts/contracts/LSP8IdentifiableDigitalAsset/LSP8Constants.sol";
-
-import {_LSP4_TOKEN_TYPE_DATA_KEY, TokenType} from "../TokenTypes.sol";
+import {
+    _LSP4_TOKEN_TYPE_COLLECTION
+} from "@lukso/lsp-smart-contracts/contracts/LSP4DigitalAssetMetadata/LSP4Constants.sol";
 
 /**
  * @dev Pseudo code example, LSP8 collection of digital stickers, where each sticker is a LSP7 contract with a limited supply available.
@@ -23,18 +25,11 @@ contract LSP8DigitalStickersCollection is
         "Example Digital Stickers Collection",
         "EDSC",
         msg.sender,
-        _LSP8_TOKENID_TYPE_ADDRESS
+        _LSP4_TOKEN_TYPE_COLLECTION,
+        _LSP8_TOKENID_FORMAT_ADDRESS
     )
 {
-    constructor() {
-        // Set the type of the token
-        _setData(_LSP4_TOKEN_TYPE_DATA_KEY, abi.encode(TokenType.COLLECTION));
-    }
-
     // Constants ---
-
-    bytes32 internal constant _LSP8_REFERENCE_CONTRACT_DATA_KEY =
-        0x708e7b881795f2e6b6c2752108c177ec89248458de3bf69d0d43480b3e5034e6;
 
     bytes32 internal constant _STICKER_PRICE_DATA_KEY =
         keccak256("Price Per Sticker");
@@ -67,7 +62,7 @@ contract LSP8DigitalStickersCollection is
             bytes[] memory dataValuesToSet = new bytes[](2);
 
             // Set Data Key "LSP8ReferenceContract",
-            dataKeysToSet[0] = _LSP8_REFERENCE_CONTRACT_DATA_KEY;
+            dataKeysToSet[0] = _LSP8_REFERENCE_CONTRACT;
             dataValuesToSet[0] = abi.encodePacked(address(this), stickerId); // "valueType": "(address,bytes32)"
 
             // Set Data Key specific to the price per sticker
