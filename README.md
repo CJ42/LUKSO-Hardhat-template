@@ -54,4 +54,5 @@ You can then run one of the following scripts as follow, specify the `--network 
 npx hardhat run scripts/deployAndSetCollectionMetadata.ts --network luksoTestnet
 npx hardhat run scripts/deployCollectionAndSetBaseURI.ts --network luksoTestnet
 npx hardhat run scripts/mintTickets.ts --network luksoTestnet
+npx hardhat run ./scripts/getAssetMetadata.ts --network luksoTestnet
 ```
