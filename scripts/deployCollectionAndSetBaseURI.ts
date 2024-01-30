@@ -15,10 +15,12 @@ async function deployAndSetCollectionMetadata() {
 
   const baseURIDataKey = ERC725YDataKeys.LSP8['LSP8TokenMetadataBaseURI'];
 
-  await nftCollection.setData(
+  const tx = await nftCollection.setData(
     baseURIDataKey,
     ethers.toUtf8Bytes('ipfs://your-base-uri-on-ipf-goes-here/'),
   );
+
+  await tx.wait();
 
   const result = await nftCollection.getData(baseURIDataKey);
   console.log('Base URI set to: ', result);

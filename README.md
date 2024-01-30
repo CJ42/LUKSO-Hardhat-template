@@ -35,3 +35,23 @@ git clone https://github.com/CJ42/LUKSO-Hardhat-template.git
 cd LUKSO-Hardhat-Template
 yarn
 ```
+
+## Running Deployment scripts
+
+You can run some of the example scripts under the `scripts/` folder. To do so, create a `.env` file and add your private key.
+
+```bash
+cp .env.example .env
+```
+
+```
+PRIVATE_KEY="0x<your-private-key>"
+```
+
+You can then run one of the following scripts as follow, specify the `--network luksoTestnet` flag to deploy on Testnet.
+
+```bash
+npx hardhat run scripts/deployAndSetCollectionMetadata.ts --network luksoTestnet
+npx hardhat run scripts/deployCollectionAndSetBaseURI.ts --network luksoTestnet
+npx hardhat run scripts/mintTickets.ts --network luksoTestnet
+```
